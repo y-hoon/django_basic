@@ -19,6 +19,7 @@
         <div class="row">
             <div class="col-12 mt-5">
                 <form method="post" action=".">
+                    {% csrf_token %}
                     <div class="form-group">
                         <label for="username">사용자 이름</label>
                         <input type="text" class="form-control" id="username" placeholder="사용자 이름" name="username" />
