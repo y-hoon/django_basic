@@ -13,15 +13,17 @@ def register(request):
         password = request.POST['password']
         re_password = request.POST['re-password']
 
+        res_data = {}
+
         if password != re_password:
-            return HttpResponse('비밀번호와 비밀번호 확인이 일치하지 않습니다!')
+            res_data['error'] = '비밀번호와 비밀번호 확인이 일치하지 않습니다!'
+        else:
+            user = User(
+                username=username,
+                password=password
+            )
 
-        user = User(
-            username=username,
-            password=password
-        )
+            user.save()
 
-        user.save()
-
-        return render(request, 'register.html')
+        return render(request, 'register.html', res_data)
 
