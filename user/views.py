@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.contrib.auth.hashers import make_password
 from .models import User
 
 # Create your views here.
@@ -20,7 +21,7 @@ def register(request):
         else:
             user = User(
                 username=username,
-                password=password
+                password=make_password(password)
             )
 
             user.save()
