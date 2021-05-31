@@ -1,9 +1,14 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.hashers import make_password, check_password
 from .models import User
 
 # Create your views here.
+
+
+def home(request):
+    return HttpResponse('Home!')
+
 
 def login(request):
     if request.method == 'GET':
@@ -19,7 +24,8 @@ def login(request):
             user = User.objects.get(username=username)
             if check_password(password, user.password):
                 # 비밀번호 일치, 로그인 성공
-                pass
+                request.session['user'] = user.username
+                return redirect('/')
             else:
                 res_data['error'] = '비밀번호가 일치하지 않습니다.'
 
