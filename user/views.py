@@ -15,6 +15,11 @@ def home(request):
 
     return HttpResponse('Home!')
 
+def logout(request):
+    if request.session.get('user'):
+        del(request.session['user'])
+
+    return redirect('/')
 
 def login(request):
     if request.method == 'GET':
