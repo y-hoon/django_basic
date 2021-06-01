@@ -7,6 +7,12 @@ from .models import User
 
 
 def home(request):
+    user_id = request.session.get('user')
+
+    if user_id:
+        user = User.objects.get(pk=user_id)
+        return HttpResponse(user.username + "님, 로그인되었습니다.");
+
     return HttpResponse('Home!')
 
 
@@ -24,7 +30,7 @@ def login(request):
             user = User.objects.get(username=username)
             if check_password(password, user.password):
                 # 비밀번호 일치, 로그인 성공
-                request.session['user'] = user.username
+                request.session['user'] = user.id
                 return redirect('/')
             else:
                 res_data['error'] = '비밀번호가 일치하지 않습니다.'
