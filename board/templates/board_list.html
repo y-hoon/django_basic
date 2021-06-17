@@ -13,12 +13,16 @@
                     </tr>
                 </thead>
                 <tbody class="text-dark">
-                    <tr>
-                        <td>1</td>
-                        <td>제목 테스트</td>
-                        <td>아이디 테스트</td>
-                        <td>2021-06-17 20:19:10</td>
+
+                {% for board in boards %}
+                     <tr>
+                        <td>{{ board.id }}</td>
+                        <td>{{ board.title }}</td>
+                        <td>{{ board.writer }}</td>
+                        <td>{{ board.registered_dttm }}</td>
                     </tr>
+                {% endfor %}
+
                 </tbody>
             </table>
         </div>
