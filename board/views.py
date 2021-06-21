@@ -6,6 +6,11 @@ from user.models import User
 
 # create your views here.
 
+def board_detail(request, pk):
+    board = Board.objects.get(pk=pk)
+
+    return render(request, 'board_detail.html', {'board': board})
+
 
 def board_list(request):
     boards = Board.objects.all().order_by('-id')
