@@ -13,9 +13,7 @@ def home(request):
 
     if user_id:
         user = User.objects.get(pk=user_id)
-        return HttpResponse(user.username + "님, 로그인되었습니다.");
-
-    return HttpResponse('Home!')
+    return render(request, 'home.html')
 
 
 def logout(request):

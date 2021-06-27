@@ -21,7 +21,15 @@
                     {% endif %}
                 {% endfor %}
 
-                <button type="submit" class="btn btn-primary mt-2">글쓰기</button>
+                <div class="row mt-3">
+                    <div class="col-2 d-grid gap-2">
+                        <button class="btn btn-primary" type="submit">글쓰기</button>
+                    </div>
+                    <div class="col-2 d-grid gap-2">
+                        <button type="button" class="btn btn-secondary" onclick="location.href='/board/list/'">돌아가기</button>
+                    </div>
+                    <div class="col-8"></div>
+                </div>
             </form>
         </div>
     </div>
