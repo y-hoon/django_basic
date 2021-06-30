@@ -1,6 +1,8 @@
 from django.core.paginator import Paginator
 from django.http import Http404
 from django.shortcuts import render, redirect
+
+from tag.models import Tag
 from .models import Board
 from .forms import BoardForm
 from user.models import User
@@ -39,6 +41,16 @@ def board_write(request):
             board.contents = form.cleaned_data['contents']
             board.writer = user
             board.save()
+
+            tags = form.cleaned_data['tags'].split(',')
+
+            for tag in tags:
+                if not tag:
+                    continue
+
+                # 태그가 존재하면 아무 동작하지 않고 존재하지 않으면 생성함
+                _tag, created = Tag.objects.get_or_create(name=tag)
+                board.tags.add(_tag)
 
             return redirect('/board/list/')
     else:
